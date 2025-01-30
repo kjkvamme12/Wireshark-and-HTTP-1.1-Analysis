@@ -105,3 +105,13 @@ To extract files from this Wireshark capture, File > Export Objects > HTTP
 This brings us to a window with all the HTTP trnsactions listed, as well as associated Hostnames, Content Types, Sizes, and Filenames. 
 
 Once we search what we are looking for, we can view the file in our desktop. This is how we carve a file out of an hTTP packet capture
+
+## Additional Question
+Take a look at the packet capture, do you notice anything suspicious?
+
+1. After scrolling through and observing the hosts, the account-infos-paypal.com   does look suspicious.
+   
+![Screenshot 2025-01-30 152641](https://github.com/user-attachments/assets/c78a409e-be7c-4675-af34-2e92fcb13674)
+
+2. Now filter down traffic just to this domain name.
+  - Locate the IP address and add as a filter. 
