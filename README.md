@@ -47,10 +47,10 @@ Usually if hunting for malicious activity, it is good to sort by port as odd por
 This list only shows port 80, which is normal given that in our previous protocol hiercy, all the traffic is HTTP. There is some traffic to different IP addresses which may need to be inspected. 
 
 ### HTTP/1.1 Analysis
-1. Apply the http display filter in Wireshark since we know the capture is all http.
+ ### 1. Apply the http display filter in Wireshark since we know the capture is all http.
 
 
-2. Show the Host Column
+### 2. Show the Host Column
 
    - The host column is very useful to show when analyzing HTTP
    - once http filter is applied, click first line, then in middle of the page go to packet details, and expand the line that says Hyptertext Transfer Protocol, then click Host: header
@@ -64,4 +64,44 @@ This list only shows port 80, which is normal given that in our previous protoco
 Having a host column makes IP-based filtering easier, because now we can associate an IP with a domain name
 
 
-2. Viewing HTTP/1.1 Headers in Packet Details
+### 2. Viewing HTTP/1.1 Headers in Packet Details
+
+Pull packet 43 into focus. 
+
+![Screenshot 2025-01-30 143609](https://github.com/user-attachments/assets/ba36b511-a4c3-4419-9fe7-0490a88fa90b)
+
+We see here that the user was browsing to the BBC website. This packet would be the initial GET request used to request the root of the webpage. 
+ - The HTTP method, which is GET
+ - The URL that is being loaded /
+ - The version of HTTP being used HTTP/1.1
+
+Now go to packet details and expand the Hypter Text Transfer Protocol
+
+
+![Screenshot 2025-01-30 143844](https://github.com/user-attachments/assets/4aa9ad69-958d-4ab0-8eef-d16fc365d1db)
+
+All the headers from the HTTP request are shown here. 
+Now go inspect packet headers from packet 89, which appears to be the response to 43. 
+
+
+![Screenshot 2025-01-30 144049](https://github.com/user-attachments/assets/ce0e3ac6-6876-4482-8583-3e9fc1cd6726)
+
+### 3. Following an HTTP/1.1 Session 
+
+To follow a session, right-click then seleect Follow > HTTP Stream
+
+![Screenshot 2025-01-30 144301](https://github.com/user-attachments/assets/5ded5561-6f24-4154-bfc5-aff1fa598921)
+
+This gives us the full conversation with the request shown in red, and the response in blue. 
+
+
+### 4. Extracting Files from an HTTP/1.1 Packet Capture
+
+To extract files from this Wireshark capture, File > Export Objects > HTTP
+
+
+![Screenshot 2025-01-30 150339](https://github.com/user-attachments/assets/64e99f1a-a9d4-4464-841d-ba4c68a05ad2)
+
+This brings us to a window with all the HTTP trnsactions listed, as well as associated Hostnames, Content Types, Sizes, and Filenames. 
+
+Once we search what we are looking for, we can view the file in our desktop. This is how we carve a file out of an hTTP packet capture
